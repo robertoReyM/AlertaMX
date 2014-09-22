@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="card_pressed">#ebebeb</color>
+    <color name="card_activated">#500099CC</color>
+
+    <color name="background_gray">#ebebeb</color>
+    <color name="default_bars">#ffc1c1c1</color>
+    <color name="background_scroll">#99D94A38</color>
+    <color name="menu_tips">#66318d29</color>
+    <color name="menu_risk_zones">#66fdf401</color>
+    <color name="menu_family">#66085c98</color>
+    <color name="menu_help">#66ff8000</color>
+    <color name="menu_alerts">#66ae2e25</color>
+    <color name="main_tips">#ff318d29</color>
+    <color name="main_atlas">#ffecad30</color>
+    <color name="main_family">#ff4A8BF6</color>
+    <color name="main_help">#ffff8000</color>
+    <color name="main_alerts">#ffD94A38</color>
+    <color name="title_gray">#ff555555</color>
+    <color name="footer_card_color">#ccc</color>
+    <color name="main_alerts_transparent">#99D94A38</color>
+    <color name="main_tips_transparent">#99318d29</color>
+    <color name="main_atlas_transparent">#99ecad30</color>
+    <color name="main_family_transparent">#994A8BF6</color>
+</resources>

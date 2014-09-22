@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/card_outer_frame">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/card_inner_frame">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/darker_gray"
+                    android:id="@+id/alert_info_sent"
+                    android:layout_marginLeft="8dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Video example header explained"
+                    android:textSize="16sp"
+                    android:textColor="@color/title_gray"
+                    android:id="@+id/alert_info_headline"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:layout_margin="8dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:gravity="bottom|center_horizontal"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:background="@color/default_bars"
+                                android:id="@+id/prob_bar_1"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="15dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/prob_bar_2"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="20dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/prob_bar_3"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="25dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/prob_bar_4"/>
+                            </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="10dp"
+                            android:text="@string/probability"
+                            android:textColor="@color/title_gray"
+                            android:id="@+id/alert_info_probability"
+                            android:layout_gravity="center" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:gravity="bottom|center_horizontal"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:background="@color/default_bars"
+                                android:id="@+id/urg_bar_1"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="15dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/urg_bar_2"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="20dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/urg_bar_3"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="25dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/urg_bar_4"/>
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="10dp"
+                            android:text="@string/urgency"
+                            android:textColor="@color/title_gray"
+                            android:id="@+id/alert_info_urgency"
+                            android:layout_gravity="center" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:gravity="bottom|center_horizontal"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:background="@color/default_bars"
+                                android:id="@+id/sev_bar_1"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="15dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/sev_bar_2"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="20dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/sev_bar_3"/>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="25dp"
+                                android:background="@color/default_bars"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/sev_bar_4"/>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/title_gray"
+                            android:text="@string/severity"
+                            android:id="@+id/alert_info_severity"
+                            android:layout_gravity="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/image_map"
+                    android:src="@drawable/map_icon"
+                    android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Video example header explained"
+                    android:layout_margin="8dp"
+                    android:id="@+id/alert_info_area"
+                    android:padding="3dp" />
+
+                <!--suppress AndroidLintContentDescription
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_identifier"
+                                    android:padding="3dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_sender"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_sent"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_status"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_msg_type"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_scope"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_category"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_event"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_urgency"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_severity"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_certainty"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_sender_name"
+                                    android:padding="3dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_description"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_instruction"
+                                    android:padding="3dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:text="Video example header explained"
+                                    android:id="@+id/alert_info_web"
+                                    android:padding="3dp" />
+
+                 -->
+            </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

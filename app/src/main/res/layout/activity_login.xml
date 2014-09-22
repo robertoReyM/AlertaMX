@@ -1,0 +1,110 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.smartplace.alerta.LoginActivity" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <com.smartplace.alerta.coverflow.FancyCoverFlow
+                android:id="@+id/fancyCoverFlow"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/txt_user_type"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+        <com.andreabaccega.widget.FormEditText
+            whatever:testType="personFullName"
+            whatever:emptyErrorString="@string/empty_field"
+            whatever:testErrorString="@string/error_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/name"
+            android:id="@+id/edit_name"
+            />
+
+        <com.andreabaccega.widget.FormEditText
+            whatever:testType="phone"
+            whatever:emptyErrorString="@string/empty_field"
+            whatever:testErrorString="@string/error_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/phone_number"
+            android:id="@+id/edit_mobile"
+            />
+
+        <com.andreabaccega.widget.FormEditText
+            whatever:testType="alphaNumeric"
+            whatever:emptyErrorString="@string/empty_field"
+            whatever:testErrorString="@string/error_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/password"
+            android:id="@+id/edit_password"
+            />
+        <com.andreabaccega.widget.FormEditText
+            whatever:testType="alphaNumeric"
+            whatever:emptyErrorString="@string/empty_field"
+            whatever:testErrorString="@string/error_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/password_confirm"
+            android:id="@+id/edit_password_confirm"
+            />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_family"
+        android:textColor="@android:color/white"
+        android:id="@+id/btn_register"
+        android:text="@string/register"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+</LinearLayout>
+</LinearLayout>

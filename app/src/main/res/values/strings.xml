@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AlertaMX</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tutorials">TutorialsActivity</string>
+    <string name="title_alerts">Alertas</string>
+    <string name="title_atlas">Zonas de riesgo</string>
+    <string name="title_tutorials">Instrucciones de seguridad</string>
+    <string name="title_my_family">Mi familia</string>
+    <string name="title_rescue">Ayuda</string>
+    <string name="title_activity_people">PeopleActivity</string>
+    <string name="title_activity_risk_zones">RiskZonesActivity</string>
+    <string name="options_cancel">Cancelar</string>
+    <string name="confirm">Si</string>
+    <string name="title_activity_login">AlertaMx</string>
+    <string name="title_activity_alert_detailed">AlertDetailedActivity</string>
+    <string name="header_alert_description">Más información</string>
+    <string name="default_alert_description">No se tiene ninguna descripción detallada</string>
+    <string name="header_alert_instruction">Instrucciones</string>
+    <string name="default_alert_instruction">No hay instrucciones para esta alerta</string>
+    <string name="header_alert_source">Fuente</string>
+    <string name="action_config">Configuración</string>
+    <string name="title_activity_alerts_config">AlertsConfigActivity</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="header_config_alerts">Estados de los que deseo recibir alertas</string>
+    <string name="state_1">Aguascalientes</string>
+    <string name="receive_notifications">¿Desea recibir notificaciones?</string>
+
+    <string-array name="states_array">
+        <item>Aguascalientes</item>
+        <item>Baja California</item>
+        <item>Baja California Sur</item>
+        <item>Campeche</item>
+        <item>Chiapas</item>
+        <item>Chihuahua</item>
+        <item>Coahuila</item>
+        <item>Colima</item>
+        <item>Distrito Federal</item>
+        <item>Durango</item>
+        <item>Guanajuato</item>
+        <item>Guerrero</item>
+        <item>Hidalgo</item>
+        <item>Jalisco</item>
+        <item>México</item>
+        <item>Michoacán</item>
+        <item>Morelos</item>
+        <item>Nayarit</item>
+        <item>Nuevo León</item>
+        <item>Oaxaca</item>
+        <item>Puebla</item>
+        <item>Querétaro</item>
+        <item>Quintana Roo</item>
+        <item>San Luis Potosí</item>
+        <item>Sinaloa</item>
+        <item>Sonora</item>
+        <item>Tabasco</item>
+        <item>Tamaulipas</item>
+        <item>Tlaxcala</item>
+        <item>Veracruz</item>
+        <item>Yucatán</item>
+        <item>Zacatecas</item>
+    </string-array>
+    <string-array name="states_id_array">
+        <item>Ags</item>
+        <item>BC</item>
+        <item>BCS</item>
+        <item>Camp</item>
+        <item>Chis</item>
+        <item>Chih</item>
+        <item>Coah</item>
+        <item>Col</item>
+        <item>DF</item>
+        <item>Dgo</item>
+        <item>Gto</item>
+        <item>Gro</item>
+        <item>Hgo</item>
+        <item>Jal</item>
+        <item>Mex</item>
+        <item>Mich</item>
+        <item>Mor</item>
+        <item>Nay</item>
+        <item>NL</item>
+        <item>Oax</item>
+        <item>Pue</item>
+        <item>Qro</item>
+        <item>Q Roo</item>
+        <item>SLP</item>
+        <item>Sin</item>
+        <item>Son</item>
+        <item>Tab</item>
+        <item>Tamps</item>
+        <item>Tlax</item>
+        <item>Ver</item>
+        <item>Yuc</item>
+        <item>Zac</item>
+    </string-array>
+
+    <string name="title_activity_alerts_main">AlertsMainActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="lbl_config">Configuración</string>
+    <string name="are_you_ok">¿Te encuentras a salvo?</string>
+    <string name="login_instructions">Puedes pedir auxilio a Proteción Civil y tu familia durante una emergencia por medio de esta app. El sistema envía tu localización e información para apresurar el rescate. Registráte y utiliza este servicio.</string>
+    <string name="register">Registrarme</string>
+    <string name="name">Nombre completo</string>
+    <string name="phone_number">Celular 10 digitos</string>
+    <string name="password">Contraseña</string>
+    <string name="password_confirm">Confirmar contraseña</string>
+    <string name="empty_field">Favor de llenar este campo</string>
+    <string name="error_field">El contenido del campo es inválido</string>
+    <string name="passwords_do_not_match">La contraseña de confirmación no coincide</string>
+    <string name="creating_account">Creando cuenta</string>
+    <string name="invalid_parameters">Parámetros inválidos</string>
+    <string name="invalid_error">Error en el registro</string>
+    <string name="username_already_registered">Este número ya ha sido registrado</string>
+    <string name="add_family">Agregar familiar</string>
+    <string name="no_family_instructions">Por medio de este servicio puedes observar el estado de tus familiares, en caso de necesitar ayuda saber en donde se encuentran.</string>
+    <string name="header_no_family">¿Están todos bien?</string>
+    <string name="action_add">Agregar familiar</string>
+    <string name="adding_family_member">Agregando familiar</string>
+    <string name="header_dd_family">Para agregar algún familiar solo especifica su teléfono celular.</string>
+    <string name="mobile_not_found">Este celular aún no ha sido registrado</string>
+    <string name="no_internet_connection">Favor de revisar su conexión a internet</string>
+    <string name="help_instructions">¿Desea notificar a sus familiares el estado en que se encuentra?</string>
+    <string name="succesfull_alert">La alerta ha sido enviada exitosamente</string>
+    <string name="sending_alert">Enviando la alerta</string>
+    <string name="updated">Actualizado: </string>
+
+    <array name="main_icons_array">
+        <item>@drawable/ic_tab_alerts</item>
+        <item>@drawable/ic_tab_atlas</item>
+        <item>@drawable/ic_tab_family</item>
+        <item>@drawable/ic_tab_tips</item>
+    </array>
+
+    <string-array name="user_types_array">
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Niño</item>
+        <item>Embarazada</item>
+        <item>Discapacitado</item>
+    </string-array>
+    <string-array name="status_types_array">
+        <item>Atrapado</item>
+        <item>Estoy bien</item>
+        <item>Lastimado</item>
+    </string-array>
+    <string-array name="months_array">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+
+    <string name="title_activity_launcher">LauncherActivity</string>
+    <string name="app_name_1">alerta</string>
+    <string name="app_name_2">MX</string>
+    <string name="launcher_text">App oficial del Gobierno de la\nRepública para la alerta de desastres</string>
+    <string name="severity">Severidad</string>
+    <string name="urgency">Urgencia</string>
+    <string name="probability">Probabilidad</string>
+    <string name="published">Publicada:</string>
+    <string name="expires">Expira:</string>
+    <string name="header_alert_location">Ubicación</string>
+    <string name="affected_states">Estados afectados:</string>
+    <string name="how_it_works">Ver como funciona</string>
+    <string name="skip">Saltar</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_guide_1">Alertas</string>
+    <string name="title_guide_2">Rescate</string>
+    <string name="title_guide_3">Tu Familia</string>
+    <string name="title_guide_4">Informa</string>
+    <string name="description_guide_1">Recibe las alertas emitidas por Protección Civil durante un evento de emergencia y conoce las zonas de riesgo</string>
+    <string name="description_guide_2">Solicita ayuda a Protección Civil si te encuentras en problemas durante una emergencia. La app envia tu localización y perfil para facilitar la ayuda</string>
+    <string name="description_guide_3">Recibe notificaciones durante una emergencia para saber si tus familiares y amigos se encuentran bien o necesitan ayuda</string>
+    <string name="description_guide_4">Ayuda a Protección Civil a responder más rápido a una emergencia contribuyendo con datos sobre los afectados que ves a tu alrededor por medio de la app</string>
+    <string name="i_got_it">Ya entendí</string>
+    <string name="getting_info">Obteniendo información...</string>
+    <string name="action_refresh">Actualizar</string>
+    <string name="data_not_available">Los datos de esta zona de riesgo no se encuentran disponibles en este momento</string>
+    <string name="register_first">Para utilizar este servicio es necesario registrarse</string>
+    <string name="not_available">No disponible</string>
+    <string name="register_missing">Es necesario registrarte para utilizar este servicio</string>
+
+</resources>

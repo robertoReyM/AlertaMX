@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="com.smartplace.alerta.init.GuideActivity">
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/txt_header"
+        android:background="#ffffff"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:id="@+id/image_dot_1"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_dot_selected"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:id="@+id/image_dot_2"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_dot_unselected"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:id="@+id/image_dot_3"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_dot_unselected"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:id="@+id/image_dot_4"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_dot_unselected"
+            android:layout_gravity="center" />
+        </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_family"
+        android:textColor="@android:color/white"
+        android:id="@+id/btn_got_it"
+        android:text="@string/i_got_it"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp" />
+
+</LinearLayout>

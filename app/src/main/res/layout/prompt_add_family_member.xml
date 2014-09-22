@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:id="@+id/image_group"
+        android:src="@drawable/ic_man"
+        android:layout_weight="1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/header_dd_family"
+        android:id="@+id/header_add_family"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_margin="20dp" />
+
+
+    <com.andreabaccega.widget.FormEditText
+        whatever:testType="phone"
+        whatever:emptyErrorString="@string/empty_field"
+        whatever:testErrorString="@string/error_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/phone_number"
+        android:id="@+id/edit_mobile"
+        />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/add_family"
+        android:id="@+id/btn_add_familiy"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:background="@color/main_family" />
+
+</LinearLayout>
