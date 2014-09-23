@@ -129,14 +129,15 @@ public class AtlasFragment extends Fragment {
                         // Finally commit the setup to our PullToRefreshLayout
                 .setup(mPullToRefreshLayout);
         setAtlasButtons();
+
+        mPullToRefreshLayout.setRefreshing(true);
+        WebServices.getAdminInfo(mAdminInfoHandler);
         return v;
     }
     @Override
     public void onResume() {
         super.onResume();
         mMapView.onResume();
-        mPullToRefreshLayout.setRefreshing(true);
-        WebServices.getAdminInfo(mAdminInfoHandler);
 
     }
 

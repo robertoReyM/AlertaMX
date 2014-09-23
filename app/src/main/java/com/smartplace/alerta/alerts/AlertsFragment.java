@@ -162,14 +162,15 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
                 startActivity(intent);
             }
         });
+
+        mPullToRefreshLayout.setRefreshing(true);
+        WebServices.getAdminInfo(mAdminInfoHandler);
         return v;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        mPullToRefreshLayout.setRefreshing(true);
-        WebServices.getAdminInfo(mAdminInfoHandler);
 
     }
     @Override
