@@ -48,6 +48,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/getting_info"
         android:layout_marginBottom="60dp"
+        android:padding="20dp"
+        android:gravity="center"
         android:textColor="@color/title_gray"
         android:id="@+id/txt_cap_empty"
         android:layout_gravity="center" />

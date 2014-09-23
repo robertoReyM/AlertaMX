@@ -14,7 +14,7 @@ public class Constants {
      * <a href=”https://code.google.com/apis/console/“>Google APIs Console</a> to
      * register a new developer key.
      */
-    public static final String DEFAULT_ADMIN_INFO = "{\"caps\":[{\"url\":\"https://correo1.conagua.gob.mx/feedsmn/feedalert.aspx\",\"name\":\"Huracánes\"},{\"url\":\"https://correo1.conagua.gob.mx/feedsmn/feedalert.aspx\",\"name\":\"Terremotos\"},{\"url\":\"https://correo1.conagua.gob.mx/feedsmn/feedalert.aspx\",\"name\":\"Huracánes\"},{\"url\":\"https://correo1.conagua.gob.mx/feedsmn/feedalert.aspx\",\"name\":\"Ciclones\"}],\"atlas\":[{\"url\":\"http://www.anr.gob.mx:6081/adaptor/rest/services/ANR/GoogleCrisis/MapServer/exts/GeoJSONServer/GeoJSON?query=1=1&layer=4&f=geojson\",\"name\":\"Hundimientos\"},{\"url\":\"http://www.anr.gob.mx:6081/adaptor/rest/services/ANR/GoogleCrisis/MapServer/exts/GeoJSONServer/GeoJSON?query=1=1&layer=3&f=geojson\",\"name\":\"Deslizamientos\"},{\"url\":\"http://www.anr.gob.mx:6081/adaptor/rest/services/ANR/GoogleCrisis/MapServer/exts/GeoJSONServer/GeoJSON?query=1=1&layer=2&f=geojson\",\"name\":\"Tsunamis\"},{\"url\":\"http://www.anr.gob.mx:6081/adaptor/rest/services/ANR/GoogleCrisis/MapServer/exts/GeoJSONServer/GeoJSON?query=1=1&layer=1&f=geojson\",\"name\":\"Cenizas\"}]}";
+    public static final String DEFAULT_ADMIN_INFO = "{\"caps\":[],\"atlas\":[]}";
     public static final String DEFAULT_CAP_INFO = "{\"title\":\"\",\"id\":\"\",\"rights\":\"\",\"updated\":\"\",\"entry\":[]}";
     public static final String DEFAULT_ATLAS_INFO = "{\"type\":\"FeatureCollection\",\"features\":[]}";
     public static final String DEFAULT_FAMILY_INFO = "{\"familyMembers\":[]}";

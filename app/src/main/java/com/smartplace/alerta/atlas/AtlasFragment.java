@@ -3,11 +3,7 @@ package com.smartplace.alerta.atlas;
 
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,18 +23,11 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -48,7 +37,6 @@ import com.smartplace.alerta.MemoryServices;
 import com.smartplace.alerta.R;
 import com.smartplace.alerta.WebServices;
 import com.smartplace.alerta.admin.AdminInfo;
-import com.smartplace.alerta.alerts.AlertsConfigActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,6 +71,7 @@ public class AtlasFragment extends Fragment {
     private int mPosition = 0;
     private PullToRefreshLayout mPullToRefreshLayout;
     private ArrayList<TextView> mCapOptions;
+    HorizontalScrollView mScrollView;
 
     public static AtlasFragment newInstance() {
         AtlasFragment fragment = new AtlasFragment();
@@ -121,53 +110,10 @@ public class AtlasFragment extends Fragment {
         googleMap = mMapView.getMap();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.694857, -103.035121), 4));
 
-        HorizontalScrollView scrollView = (HorizontalScrollView)v.findViewById(R.id.scrollview_atlas);
-
-
-        LinearLayout linearLayout = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT,1f);
-        params.gravity = Gravity.CENTER;
-        linearLayout.setLayoutParams(params);
-        linearLayout.setGravity(Gravity.CENTER);
+         mScrollView = (HorizontalScrollView)v.findViewById(R.id.scrollview_atlas);
 
         mAdminInfo = new Gson().fromJson(MemoryServices.getAdminInfo(getActivity()), AdminInfo.class);
 
-        mCapOptions = new ArrayList<TextView>();
-        Typeface titleFont= Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSansLight.ttf");
-        for(int i = 0; i< mAdminInfo.getAtlas().size();i++){
-            TextView textView = new TextView(getActivity());
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
-            textView.setText(mAdminInfo.getAtlas().get(i).getName());
-            textView.setGravity(Gravity.CENTER);
-            textView.setPadding(30, 0, 30, 0);
-            textView.setTypeface(titleFont);
-            textView.setLines(1);
-            textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-            textView.setTextColor(getResources().getColor(android.R.color.white));
-            final int finalI = i;
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    for(int index = 0; index<mCapOptions.size();index++){
-                        if(index == finalI) {
-                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-                        }else{
-                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                        }
-                    }
-                    setAtlasInformation(finalI);
-                }
-            });
-            mCapOptions.add(textView);
-            linearLayout.addView(textView);
-            if(i<(mAdminInfo.getAtlas().size()-1)){
-                View view = new View(getActivity());
-                view.setLayoutParams(new LinearLayout.LayoutParams(2, 40));
-                view.setBackgroundColor(getResources().getColor(android.R.color.white));
-                linearLayout.addView(view);
-            }
-        }
-        scrollView.addView(linearLayout);
         // Now setup the PullToRefreshLayout
         ActionBarPullToRefresh.from(getActivity())
                 // Mark All Children as pull-able
@@ -182,15 +128,16 @@ public class AtlasFragment extends Fragment {
                 })
                         // Finally commit the setup to our PullToRefreshLayout
                 .setup(mPullToRefreshLayout);
-
-        mCapOptions.get(0).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-        setAtlasInformation(0);
+        setAtlasButtons();
         return v;
     }
     @Override
     public void onResume() {
         super.onResume();
         mMapView.onResume();
+        mPullToRefreshLayout.setRefreshing(true);
+        WebServices.getAdminInfo(mAdminInfoHandler);
+
     }
 
     @Override
@@ -232,19 +179,75 @@ public class AtlasFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 mPullToRefreshLayout.setRefreshing(true);
-                WebServices.getGeoJson(mAdminInfo.getAtlas().get(mPosition).getName(), mAdminInfo.getAtlas().get(mPosition).getUrl(), getGeoJsonHandler);
+                WebServices.getAdminInfo(mAdminInfoHandler);
+                //WebServices.getGeoJson(mAdminInfo.getAtlas().get(mPosition).getName(), mAdminInfo.getAtlas().get(mPosition).getUrl(), getGeoJsonHandler);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    private void setAtlasButtons(){
+        mScrollView.removeAllViews();
+        LinearLayout linearLayout = new LinearLayout(getActivity());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT,1f);
+        params.gravity = Gravity.CENTER;
+        linearLayout.setLayoutParams(params);
+        linearLayout.setGravity(Gravity.CENTER);
+
+
+        mCapOptions = new ArrayList<TextView>();
+        Typeface titleFont= Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSansLight.ttf");
+        for(int i = 0; i< mAdminInfo.getAtlas().size();i++){
+            TextView textView = new TextView(getActivity());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+            textView.setText(mAdminInfo.getAtlas().get(i).getName());
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(30, 0, 30, 0);
+            textView.setTypeface(titleFont);
+            textView.setLines(1);
+            textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            textView.setTextColor(getResources().getColor(android.R.color.white));
+            final int finalI = i;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for(int index = 0; index<mCapOptions.size();index++){
+                        if(index == finalI) {
+                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                        }else{
+                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                        }
+                    }
+                    setAtlasInformation(finalI);
+                }
+            });
+            mCapOptions.add(textView);
+            linearLayout.addView(textView);
+            if(i<(mAdminInfo.getAtlas().size()-1)){
+                View view = new View(getActivity());
+                view.setLayoutParams(new LinearLayout.LayoutParams(2, 40));
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+                linearLayout.addView(view);
+            }
+        }
+        mScrollView.addView(linearLayout);
+
+
+        try {
+            mCapOptions.get(0).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            setAtlasInformation(0);
+        }catch (IndexOutOfBoundsException e){
+
+        }
+    }
     private void setAtlasInformation(int position){
 
-        mPosition = position;
-        mAdminInfo.getAtlas().get(position);
-        googleMap.clear();
-        setGeoJsonIntoMaps(MemoryServices.getAtlasInfo(getActivity(), mAdminInfo.getAtlas().get(position).getName()));
-
+        if(mAdminInfo.getAtlas().size()!=0) {
+            mPosition = position;
+            mAdminInfo.getAtlas().get(position);
+            googleMap.clear();
+            setGeoJsonIntoMaps(MemoryServices.getAtlasInfo(getActivity(), mAdminInfo.getAtlas().get(position).getName()));
+        }
     }
     private Handler getGeoJsonHandler = new Handler() {
         @Override
@@ -310,7 +313,7 @@ public class AtlasFragment extends Fragment {
                     }else if(type.equals("Point")){
                         JSONArray cordsArray = jsonGeometry.getJSONArray("coordinates");
                         googleMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(cordsArray.getDouble(0), cordsArray.getDouble(1))));
+                                .position(new LatLng(Double.valueOf(cordsArray.getString(1)), Double.valueOf(cordsArray.getString(0)))));
                     }
                 }
             }
@@ -320,5 +323,37 @@ public class AtlasFragment extends Fragment {
         }
         return  false;
     }
+    private Handler mAdminInfoHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle bundle = msg.getData();
+            String response = bundle != null ? bundle.getString("response") : "";
+            String name = bundle != null ? bundle.getString("name") : "";
+
+                //mLoadingDialog.dismiss();
+                if ((response.equals("")) || response.equals("no connection")) {
+                /*There is an issue with the response, no data received*/
+                } else {
+
+                    try {
+
+                        mAdminInfo = new Gson().fromJson(response,AdminInfo.class);
+                        MemoryServices.setAdminInfo(getActivity(),response);
+                        setAtlasButtons();
+                        try {
+                            WebServices.getGeoJson(mAdminInfo.getAtlas().get(mPosition).getName(), mAdminInfo.getAtlas().get(mPosition).getUrl(), getGeoJsonHandler);
+                        }catch (IndexOutOfBoundsException e){
+
+                            if(mPullToRefreshLayout.isRefreshing()){
+                                mPullToRefreshLayout.setRefreshComplete();
+                            }
+                        }
+                    } catch (JsonSyntaxException e) {
+
+                    }
+                }
+            }
+
+    };
 
 }

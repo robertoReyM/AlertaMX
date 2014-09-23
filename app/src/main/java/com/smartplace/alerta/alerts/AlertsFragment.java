@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,21 +26,17 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.andreabaccega.widget.FormEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.melnykov.fab.FloatingActionButton;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.smartplace.alerta.MemoryServices;
 import com.smartplace.alerta.R;
 import com.smartplace.alerta.Utilities.TransparentProgressDialog;
 import com.smartplace.alerta.WebServices;
 import com.smartplace.alerta.admin.AdminInfo;
-import com.smartplace.alerta.admin.CapInfo;
 import com.smartplace.alerta.cap.CapEntry;
 import com.smartplace.alerta.cap.CapFeed;
 import com.smartplace.alerta.coverflow.FancyCoverFlow;
-import com.smartplace.alerta.coverflow.FancyCoverFlowSampleAdapter;
 import com.smartplace.alerta.coverflow.FancyCoverFlowStatusAdapter;
 import com.smartplace.alerta.family.members.FamilyMember;
 
@@ -73,6 +68,7 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
     private TextView mTxtGettingInfo;
     private int mPosition = 0;
     private ArrayList<TextView> mCapOptions;
+    HorizontalScrollView mScrollView;
     //private ProgressDialog mLoadingDialog;
 
     /**
@@ -111,55 +107,19 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
         mAlertsList = (ListView) v.findViewById(R.id.list_entry_items);
         mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.ptr_layout);
         mTxtGettingInfo = (TextView)v.findViewById(R.id.txt_cap_empty);
-        HorizontalScrollView scrollView = (HorizontalScrollView)v.findViewById(R.id.scrollview_caps);
-
-        LinearLayout linearLayout = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT,1f);
-        params.gravity = Gravity.CENTER;
-        linearLayout.setLayoutParams(params);
-        linearLayout.setGravity(Gravity.CENTER);
+        mScrollView = (HorizontalScrollView)v.findViewById(R.id.scrollview_caps);
 
         mAdminInfo = new Gson().fromJson(MemoryServices.getAdminInfo(getActivity()), AdminInfo.class);
 
         Typeface titleFont= Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSansLight.ttf");
         mTxtGettingInfo.setTypeface(titleFont);
 
-        mCapOptions = new ArrayList<TextView>();
-        for(int i = 0; i< mAdminInfo.getCaps().size();i++){
-            TextView textView = new TextView(getActivity());
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
-            textView.setText(mAdminInfo.getCaps().get(i).getName());
-            textView.setGravity(Gravity.CENTER);
-            textView.setPadding(30, 0, 30, 0);
-            textView.setTypeface(titleFont);
-            textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-            textView.setTextColor(getResources().getColor(android.R.color.white));
-            final int finalI = i;
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    for(int index = 0; index<mCapOptions.size();index++){
-                        if(index == finalI) {
-                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-                        }else{
-                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                        }
-                    }
-                    setCAPInformation(finalI);
-                }
-            });
-            mCapOptions.add(textView);
-            linearLayout.addView(textView);
-            if(i<(mAdminInfo.getCaps().size()-1)){
-                View view = new View(getActivity());
-                view.setLayoutParams(new LinearLayout.LayoutParams(2, 40));
-                view.setBackgroundColor(getResources().getColor(android.R.color.white));
-                linearLayout.addView(view);
-            }
+        setCapButtons();
+        if(mAdminInfo.getCaps().size()==0){
+            mTxtGettingInfo.setText(getString(R.string.no_service_available));
+        }else{
+            mTxtGettingInfo.setText(getString(R.string.getting_info));
         }
-        scrollView.addView(linearLayout);
-
-        mCapOptions.get(0).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         mCapEntries = new ArrayList();
 
 
@@ -208,6 +168,8 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
     @Override
     public void onResume(){
         super.onResume();
+        mPullToRefreshLayout.setRefreshing(true);
+        WebServices.getAdminInfo(mAdminInfoHandler);
 
     }
     @Override
@@ -237,7 +199,8 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
                 return true;
             case R.id.action_refresh:
                 mPullToRefreshLayout.setRefreshing(true);
-                WebServices.getCAP(mAdminInfo.getCaps().get(mPosition).getName(), mAdminInfo.getCaps().get(mPosition).getUrl(), getCapHandler);
+                WebServices.getAdminInfo(mAdminInfoHandler);
+                //WebServices.getCAP(mAdminInfo.getCaps().get(mPosition).getName(), mAdminInfo.getCaps().get(mPosition).getUrl(), getCapHandler);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -247,24 +210,76 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
 
         mPosition = position;
         mCapEntries.clear();
-        mCapFeed = new Gson().fromJson(MemoryServices.getCAPInfo(getActivity(), mAdminInfo.getCaps().get(position).getName()), CapFeed.class);
-        setCapItems();
-        if(mCapFeed.getEntries().size()==0){
-            mTxtGettingInfo.setVisibility(View.VISIBLE);
-            mPullToRefreshLayout.setRefreshing(true);
-            WebServices.getCAP(mAdminInfo.getCaps().get(mPosition).getName(),mAdminInfo.getCaps().get(mPosition).getUrl(), getCapHandler);
+        if(mAdminInfo.getCaps().size()!=0) {
+            mTxtGettingInfo.setText(getString(R.string.getting_info));
+            mCapFeed = new Gson().fromJson(MemoryServices.getCAPInfo(getActivity(), mAdminInfo.getCaps().get(position).getName()), CapFeed.class);
+            setCapItems();
+            if (mCapFeed.getEntries().size() == 0) {
+                mTxtGettingInfo.setVisibility(View.VISIBLE);
+                mPullToRefreshLayout.setRefreshing(true);
+                WebServices.getCAP(mAdminInfo.getCaps().get(mPosition).getName(), mAdminInfo.getCaps().get(mPosition).getUrl(), getCapHandler);
 
-        }else{
-            mTxtGettingInfo.setVisibility(View.INVISIBLE);
+            } else {
+                mTxtGettingInfo.setVisibility(View.INVISIBLE);
+            }
         }
-
         AlertsListAdapter alertsListAdapter = new AlertsListAdapter(getActivity(), mCapEntries);
         mAnimAlertsListAdapter = new SwingBottomInAnimationAdapter(alertsListAdapter);
         mAnimAlertsListAdapter.setAbsListView(mAlertsList);
         mAlertsList.setAdapter(mAnimAlertsListAdapter);
-
     }
 
+    private void setCapButtons(){
+
+        mScrollView.removeAllViews();
+        LinearLayout linearLayout = new LinearLayout(getActivity());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT,1f);
+        params.gravity = Gravity.CENTER;
+        linearLayout.setLayoutParams(params);
+        linearLayout.setGravity(Gravity.CENTER);
+
+        Typeface titleFont= Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSansLight.ttf");
+        mCapOptions = new ArrayList<TextView>();
+        for(int i = 0; i< mAdminInfo.getCaps().size();i++){
+            TextView textView = new TextView(getActivity());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+            textView.setText(mAdminInfo.getCaps().get(i).getName());
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(30, 0, 30, 0);
+            textView.setTypeface(titleFont);
+            textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            textView.setTextColor(getResources().getColor(android.R.color.white));
+            final int finalI = i;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for(int index = 0; index<mCapOptions.size();index++){
+                        if(index == finalI) {
+                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                        }else{
+                            mCapOptions.get(index).setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                        }
+                    }
+                    setCAPInformation(finalI);
+                }
+            });
+            mCapOptions.add(textView);
+            linearLayout.addView(textView);
+            if(i<(mAdminInfo.getCaps().size()-1)){
+                View view = new View(getActivity());
+                view.setLayoutParams(new LinearLayout.LayoutParams(2, 40));
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+                linearLayout.addView(view);
+            }
+        }
+        mScrollView.addView(linearLayout);
+
+        try {
+            mCapOptions.get(0).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        }catch (IndexOutOfBoundsException e){
+
+        }
+    }
     public void showHelpDialog()
     {
 
@@ -393,6 +408,42 @@ public class AlertsFragment extends Fragment implements TransparentProgressDialo
                         mAnimAlertsListAdapter.notifyDataSetChanged();
                         MemoryServices.setCAPInfo(getActivity(), response, name);
 
+                    } catch (JsonSyntaxException e) {
+
+                    }
+                }
+            }
+        }
+    };
+    private Handler mAdminInfoHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle bundle = msg.getData();
+            String response = bundle != null ? bundle.getString("response") : "";
+            String name = bundle != null ? bundle.getString("name") : "";
+
+            if (isAttached) {
+
+                //mLoadingDialog.dismiss();
+                if ((response.equals("")) || response.equals("no connection")) {
+                /*There is an issue with the response, no data received*/
+                } else {
+
+                    try {
+
+                        mAdminInfo = new Gson().fromJson(response,AdminInfo.class);
+                        MemoryServices.setAdminInfo(getActivity(),response);
+                        setCapButtons();
+                        try {
+                            WebServices.getCAP(mAdminInfo.getCaps().get(mPosition).getName(), mAdminInfo.getCaps().get(mPosition).getUrl(), getCapHandler);
+                            mTxtGettingInfo.setText(getString(R.string.getting_info));
+                        }catch (IndexOutOfBoundsException e){
+
+                            if(mPullToRefreshLayout.isRefreshing()){
+                                mPullToRefreshLayout.setRefreshComplete();
+                            }
+                            mTxtGettingInfo.setText(getString(R.string.no_service_available));
+                        }
                     } catch (JsonSyntaxException e) {
 
                     }

@@ -197,5 +197,6 @@
     <string name="register_first">Para utilizar este servicio es necesario registrarse</string>
     <string name="not_available">No disponible</string>
     <string name="register_missing">Es necesario registrarte para utilizar este servicio</string>
+    <string name="no_service_available">No hay ningún servicio disponible en este momento</string>
 
 </resources>

@@ -44,6 +44,7 @@ public class WebServices {
     private static final String PATH_ADD_FAMILY_MEMBER = "/add/family/member";
     private static final String PATH_GET_FAMILY_MEMBER = "/get/family/members";
     private static final String PATH_SEND_ALERT = "/send/alert";
+    private static final String PATH_GET_ADMIN_INFO = "/notificationController/get_caps";
 
     public static void userRegister(final String mobile, final String name,final String type,
                                      final String pushToken, final Handler handler)
@@ -501,20 +502,55 @@ public class WebServices {
 
 
     }
-    private static String inputStreamToString(InputStream is) throws IOException{
-        String line = "";
-        StringBuilder total = new StringBuilder();
+    public static void getAdminInfo(final Handler handler)
+    {
 
-        // Wrap a BufferedReader around the InputStream
-        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+        /*Run new thread to perform users Info query*/
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
 
-        // Read response until the end
-        while ((line = rd.readLine()) != null) {
-            total.append(line);
-        }
+                HttpParams httpParameters = new BasicHttpParams();
+                // Set the timeout in milliseconds until a connection is established.
+                // The default value is zero, that means the timeout is not used.
+                int timeoutConnection = CONNECTION_TIMEOUT;
+                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
 
-        // Return full string
-        return total.toString();
+                    /*Set post information to perform query*/
+                HttpClient client = new DefaultHttpClient(httpParameters);
+                    /*set post's URL*/
+                HttpGet get = new HttpGet(SERVER_URL + PATH_GET_ADMIN_INFO);
+
+                try {
+
+                       /*Execute post*/
+                    HttpResponse httpResponse = client.execute(get);
+                        /*get post's entity*/
+                    HttpEntity entity = httpResponse.getEntity();
+
+                    String response = EntityUtils.toString(entity);
+                        /*Set message to send to the handler*/
+                    Message msg = handler.obtainMessage();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("response", response);
+                    msg.setData(bundle);
+                    handler.sendMessage(msg);
+
+                } catch (IOException e) {
+                        /*Set message to send to the handler*/
+                    Message msg = handler.obtainMessage();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("response", "no connection");
+                    msg.setData(bundle);
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+
+        /*start new thread*/
+        thread.start();
+
+
     }
 
 }
